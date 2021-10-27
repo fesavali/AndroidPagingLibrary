@@ -2,6 +2,8 @@ package com.savalicodes.paginglibrary.dataSources
 
 import android.text.PrecomputedText
 import android.util.Log
+import androidx.lifecycle.MutableLiveData
+import androidx.paging.DataSource
 import androidx.paging.PageKeyedDataSource
 import com.savalicodes.paginglibrary.models.Country
 import com.savalicodes.paginglibrary.utils.CountriesDb
@@ -32,6 +34,17 @@ class PagedCountriesDataSource: PageKeyedDataSource<Int, Country>() {
         val list = source.filter { country -> country.page == params.key  }
         Log.i(TAG, "loadAfter returning list for page ${params.key} with ${list.size} items..")
         callback.onResult(list, params.key +1)
+    }
+
+}
+class PagedCountriesDataSourceFactory : DataSource.Factory<Int, Country>() {
+    var dataSource = MutableLiveData<PagedCountriesDataSource>()
+    lateinit var latestSource: PagedCountriesDataSource
+    override fun create(): DataSource<Int, Country> {
+        latestSource = PagedCountriesDataSource()
+        dataSource.postValue(latestSource)
+
+        return latestSource
     }
 
 }

@@ -1,6 +1,8 @@
 package com.savalicodes.paginglibrary.dataSources
 
 import android.util.Log
+import androidx.lifecycle.MutableLiveData
+import androidx.paging.DataSource
 import androidx.paging.ItemKeyedDataSource
 import com.savalicodes.paginglibrary.models.Country
 import com.savalicodes.paginglibrary.utils.CountriesDb
@@ -58,4 +60,15 @@ class KeyedCountriesDataSource : ItemKeyedDataSource<Int, Country>() {
         Log.v(TAG, "loadBefore created a list of ${list.size} size for key ${params.key}")
         callback.onResult(list)
     }
+}
+class KeyedCountriesDataSourceFactory : DataSource.Factory<Int, Country>() {
+    var dataSource = MutableLiveData<KeyedCountriesDataSource>()
+    lateinit var latestSource: KeyedCountriesDataSource
+    override fun create(): DataSource<Int, Country> {
+        latestSource = KeyedCountriesDataSource()
+        dataSource.postValue(latestSource)
+
+        return latestSource
+    }
+
 }

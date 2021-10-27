@@ -1,6 +1,8 @@
 package com.savalicodes.paginglibrary.dataSources
 
 import android.util.Log
+import androidx.lifecycle.MutableLiveData
+import androidx.paging.DataSource
 import androidx.paging.PositionalDataSource
 import com.savalicodes.paginglibrary.models.Country
 import com.savalicodes.paginglibrary.utils.CountriesDb
@@ -34,6 +36,17 @@ class PositionalCountryDataSource: PositionalDataSource<Country>() {
         }
         Log.v(TAG, "loadRange created a list of ${list.size} items..")
         callback.onResult(list.orEmpty())
+    }
+
+}
+class PositionalCountriesDataSourceFactory : DataSource.Factory<Int, Country>() {
+    var dataSource = MutableLiveData<PositionalCountryDataSource>()
+    lateinit var latestSource: PositionalCountryDataSource
+    override fun create(): DataSource<Int, Country> {
+        latestSource = PositionalCountryDataSource()
+        dataSource.postValue(latestSource)
+
+        return latestSource
     }
 
 }
