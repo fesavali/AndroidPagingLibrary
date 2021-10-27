@@ -2,9 +2,12 @@ package com.savalicodes.paginglibrary.dataSources
 
 import android.text.PrecomputedText
 import android.util.Log
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.paging.DataSource
 import androidx.paging.PageKeyedDataSource
+import androidx.paging.PagedList
+import com.savalicodes.paginglibrary.CountriesBoundaryCallback
 import com.savalicodes.paginglibrary.models.Country
 import com.savalicodes.paginglibrary.utils.CountriesDb
 
@@ -45,6 +48,14 @@ class PagedCountriesDataSourceFactory : DataSource.Factory<Int, Country>() {
         dataSource.postValue(latestSource)
 
         return latestSource
+    }
+
+    fun toLiveData(
+        config: PagedList.Config,
+        b: Boolean,
+        countriesBoundaryCallback: CountriesBoundaryCallback
+    ): LiveData<PagedList<Country>> {
+
     }
 
 }
