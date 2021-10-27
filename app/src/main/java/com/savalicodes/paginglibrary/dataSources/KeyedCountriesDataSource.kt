@@ -48,6 +48,14 @@ class KeyedCountriesDataSource : ItemKeyedDataSource<Int, Country>() {
     }
 
     override fun loadBefore(params: LoadParams<Int>, callback: LoadCallback<Country>) {
-        TODO("Not yet implemented")
+        Log.v(TAG, "loadBefore called")
+        val key = params.key
+        val list = mutableListOf<Country>()
+        if(key <= 1){
+            callback.onResult(list.orEmpty())
+            return
+        }
+        Log.v(TAG, "loadBefore created a list of ${list.size} size for key ${params.key}")
+        callback.onResult(list)
     }
 }
