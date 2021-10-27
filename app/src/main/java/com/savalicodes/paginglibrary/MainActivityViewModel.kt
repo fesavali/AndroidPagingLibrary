@@ -17,7 +17,9 @@ class MainActivityViewModel : ViewModel() {
         .setEnablePlaceholders(false)
         .build()
     var dataSource = PagedCountriesDataSourceFactory()
-    var countries : LiveData<PagedList<Country>> = LivePagedListBuilder(dataSource, config).build()
+    var countries : LiveData<PagedList<Country>> = LivePagedListBuilder(dataSource, config)
+        .setBoundaryCallback(CountriesBoundaryCallback())
+        .build()
 
 
 }
