@@ -28,7 +28,10 @@ class PagedCountriesDataSource: PageKeyedDataSource<Int, Country>() {
     }
 
     override fun loadAfter(params: LoadParams<Int>, callback: LoadCallback<Int, Country>) {
-        TODO("Not yet implemented")
+        Log.i(TAG, "loadAfter called with key ${params.key}")
+        val list = source.filter { country -> country.page == params.key  }
+        Log.i(TAG, "loadAfter returning list for page ${params.key} with ${list.size} items..")
+        callback.onResult(list, params.key +1)
     }
 
 }
