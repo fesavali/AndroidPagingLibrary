@@ -6,7 +6,7 @@ import com.savalicodes.paginglibrary.models.Country
 import com.savalicodes.paginglibrary.utils.CountriesDb
 
 class KeyedCountriesDataSource : ItemKeyedDataSource<Int, Country>() {
-    private val TAG: String = "PagedCountriesDataSource"
+    private val TAG: String = "KeyedCountriesDataSource"
     private val source = CountriesDb.getCountries()
     override fun getKey(item: Country): Int {
         return  item.id
