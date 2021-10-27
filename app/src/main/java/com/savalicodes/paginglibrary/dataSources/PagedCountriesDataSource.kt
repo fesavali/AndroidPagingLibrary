@@ -1,5 +1,6 @@
 package com.savalicodes.paginglibrary.dataSources
 
+import android.text.PrecomputedText
 import android.util.Log
 import androidx.paging.PageKeyedDataSource
 import com.savalicodes.paginglibrary.models.Country
@@ -20,7 +21,10 @@ class PagedCountriesDataSource: PageKeyedDataSource<Int, Country>() {
     }
 
     override fun loadBefore(params: LoadParams<Int>, callback: LoadCallback<Int, Country>) {
-        TODO("Not yet implemented")
+        Log.i(TAG, "loadBefore called with key ${params.key}")
+        val list = source.filter { country -> country.page == params.key  }
+        Log.i(TAG, "loadBefore returning list for page ${params.key} with ${list.size} items..")
+        callback.onResult(list, params.key -1)
     }
 
     override fun loadAfter(params: LoadParams<Int>, callback: LoadCallback<Int, Country>) {
