@@ -23,6 +23,7 @@ class MainActivityViewModel : ViewModel() {
         .setBoundaryCallback(CountriesBoundaryCallback())
         .build()
 
+
 //    use this when using paging.runtime-kxt on gradle
 //    var countries : LiveData<PagedList<Country>> = dataSource
 //        .toLiveData(config,

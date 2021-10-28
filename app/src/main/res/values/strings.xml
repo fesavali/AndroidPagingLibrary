@@ -3,4 +3,5 @@
     <string name="paging_library">Paging Library</string>
     <string name="country_description">Country Description</string>
     <string name="country_name">Country Name</string>
+    <string name="delete">Delete</string>
 </resources>
