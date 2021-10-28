@@ -1,5 +1,6 @@
 package com.savalicodes.paginglibrary.dataSources
 
+import android.content.ContentValues.TAG
 import android.text.PrecomputedText
 import android.util.Log
 import androidx.lifecycle.LiveData
@@ -14,6 +15,12 @@ import com.savalicodes.paginglibrary.utils.CountriesDb
 class PagedCountriesDataSource: PageKeyedDataSource<Int, Country>() {
     private val TAG: String = "PagedCountriesDataSource"
     private val source = CountriesDb.getCountries()
+
+    fun deleteById(id : Int){
+        Log.v(TAG, "removing country by id ${id} and invalidating...")
+        CountriesDb.deleteCountryById(id)
+        invalidate()
+    }
 
     override fun loadInitial(
         params: LoadInitialParams<Int>,
@@ -43,6 +50,11 @@ class PagedCountriesDataSource: PageKeyedDataSource<Int, Country>() {
 class PagedCountriesDataSourceFactory : DataSource.Factory<Int, Country>() {
     var dataSource = MutableLiveData<PagedCountriesDataSource>()
     lateinit var latestSource: PagedCountriesDataSource
+
+    fun deleteById(id: Int){
+        Log.v(TAG, "removing country by id ${id}..")
+        latestSource.deleteById(id)
+    }
     override fun create(): DataSource<Int, Country> {
         latestSource = PagedCountriesDataSource()
         dataSource.postValue(latestSource)
