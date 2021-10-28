@@ -5,7 +5,6 @@ import androidx.lifecycle.ViewModel
 import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
 import androidx.paging.toLiveData
-import com.afzaalahmadzeeshan.android.paging.data.ContactDatabase
 import com.savalicodes.paginglibrary.dataSources.PagedCountriesDataSourceFactory
 import com.savalicodes.paginglibrary.models.Contact
 import com.savalicodes.paginglibrary.models.Country
