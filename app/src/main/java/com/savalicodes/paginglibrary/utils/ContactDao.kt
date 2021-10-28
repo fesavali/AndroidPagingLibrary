@@ -1,11 +1,12 @@
-package com.afzaalahmadzeeshan.android.paging.data
+package com.savalicodes.paginglibrary.utils
 
 import androidx.paging.DataSource
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
-import com.afzaalahmadzeeshan.android.paging.models.Contact
+import com.savalicodes.paginglibrary.models.Contact
+
 
 @Dao
 interface ContactDao {
